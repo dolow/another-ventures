@@ -1,0 +1,16 @@
+BGM
+君と歩こう / 龍崎一
+https://dova-s.jp/_contents/agreement/
+
+SE
+small_explosion1 / Taira Komori
+into_a_pc_drive2 / Taira Komori
+https://taira-komori.jpn.org/welcome.html
+
+Font
+Karantina / Google Fonts
+https://fonts.google.com/
+
+Texture
+Rock 041 / AmbientCG
+https://help.ambientcg.com/01-General/Licensing.html
