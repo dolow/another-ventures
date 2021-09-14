@@ -41,6 +41,8 @@ namespace Game
                 this.subjects[i].OnRetrieved = this.Progress;
             }
             this.totalSubjects = this.subjects.Count;
+
+            this.UpdateProgress();
         }
 
         private void Update()
