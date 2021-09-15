@@ -11,16 +11,13 @@ namespace Game
         private Player player = null;
 
         [SerializeField]
+        private UI ui = null;
+
+        [SerializeField]
         private IntentHandler intentHandler = null;
 
         [SerializeField]
         private List<Mineral> subjects = null;
-
-        [SerializeField]
-        private Text progressText = null;
-
-        [SerializeField]
-        private Text resultText = null;
 
         private int totalSubjects = 0;
 
@@ -34,6 +31,7 @@ namespace Game
             {
                 this.player.AccelerateDirection(direction);
                 this.player.AccelerateTorque(torque);
+                this.ui.SetVelocity(this.player.AccelerationRate, this.player.AccelerationRateLimit);
             };
 
             for (int i = 0; i < this.subjects.Count; i++)
@@ -43,6 +41,7 @@ namespace Game
             this.totalSubjects = this.subjects.Count;
 
             this.UpdateProgress();
+            this.ui.SetVelocity(this.player.AccelerationRate, this.player.AccelerationRateLimit);
         }
 
         private void Update()
@@ -55,11 +54,12 @@ namespace Game
 
         public void UpdateProgress()
         {
-            this.progressText.text = "" + (this.totalSubjects - this.subjects.Count) + "/" + this.totalSubjects;
+            this.ui.SetProgress(this.totalSubjects, (this.totalSubjects - this.subjects.Count));
+
             if (this.subjects.Count == 0 && !this.gameFinished)
             {
                 this.gameFinished = true;
-                StartCoroutine(this.ShowResult());
+                StartCoroutine(this.ui.ShowResult(this.elapsedTime));
             }
         }
 
@@ -71,24 +71,6 @@ namespace Game
             this.player.Retrieve();
 
             this.UpdateProgress();
-        }
-
-        private IEnumerator<WaitForSeconds> ShowResult()
-        {
-            yield return new WaitForSeconds(1);
-
-            string timeStr = ("" + this.elapsedTime);
-            int position = timeStr.IndexOf(".");
-            if (position > 0)
-            {
-                timeStr = timeStr.Substring(0, position + 2);
-            }
-                
-            this.resultText.text = "Score " + timeStr + " Sec\n";
-
-            yield return new WaitForSeconds(3);
-
-            this.resultText.text = "Score " + timeStr + " Sec\nThank you for playing !";
         }
     }
 }

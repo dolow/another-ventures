@@ -1,28 +1,31 @@
 using UnityEngine;
 
-public class Title : MonoBehaviour
+namespace Game
 {
-    private float stay = 3.0f;
-    private float zProgressPerFrame = -0.01f;
-
-    private float deltaTimes = 0.0f;
-
-    private void Update()
+    public class Title : MonoBehaviour
     {
-        this.deltaTimes += Time.deltaTime;
+        private float stay = 3.0f;
+        private float zProgressPerFrame = -0.01f;
 
-        if (this.deltaTimes < this.stay)
+        private float deltaTimes = 0.0f;
+
+        private void Update()
         {
-            return;
-        }
+            this.deltaTimes += Time.deltaTime;
 
-        Vector3 pos = this.transform.localPosition;
-        pos.z += zProgressPerFrame;
-        this.transform.localPosition = pos;
+            if (this.deltaTimes < this.stay)
+            {
+                return;
+            }
 
-        if (this.transform.localPosition.z < 0.0f)
-        {
-            GameObject.Destroy(this.gameObject);
+            Vector3 pos = this.transform.localPosition;
+            pos.z += zProgressPerFrame;
+            this.transform.localPosition = pos;
+
+            if (this.transform.localPosition.z < 0.0f)
+            {
+                GameObject.Destroy(this.gameObject);
+            }
         }
     }
 }

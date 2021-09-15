@@ -16,6 +16,10 @@ namespace Game.Role
 
         [SerializeField]
         private float continuouseDirecitonVelocityRateLimit = 12.0f;
+        public float AccelerationRateLimit
+        {
+            get { return this.continuouseDirecitonVelocityRateLimit; }
+        }
 
         private Rigidbody rigidbodyCache = null;
 
@@ -23,6 +27,10 @@ namespace Game.Role
         private Vector3 currentTorqueVelocity = Vector3.zero;
 
         private Vector3 continuouseDirecitonVelocityRate = Vector3.zero;
+        public Vector3 AccelerationRate
+        {
+            get { return this.continuouseDirecitonVelocityRate; }
+        }
 
         private void Start()
         {
@@ -41,14 +49,6 @@ namespace Game.Role
 
             this.currentDirecitonVelocity = Vector3.zero;
             this.currentTorqueVelocity = Vector3.zero;
-#if DEBUG
-            Debugger.instance.SetText(
-                "x: " + this.rigidbodyCache.velocity.x + "\n" +
-                "y: " + this.rigidbodyCache.velocity.y + "\n" +
-                "z: " + this.rigidbodyCache.velocity.z + "\n" +
-                "rate:" + this.continuouseDirecitonVelocityRate
-            );
-#endif
         }
 
         public void Retrieve()

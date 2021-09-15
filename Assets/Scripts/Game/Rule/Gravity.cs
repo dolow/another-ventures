@@ -4,6 +4,7 @@ public class Gravity
 {
     public static float MaxGravity = 6.0f;
 
+    public static float InertiaAcceleration = 2.0f;
     public static float ReveresedInertiaAcceleration = 4.0f;
     public static float StoppedInertiaDump = 2.0f;
     public static float AdditionalInertiaPerupdate = 0.02f;
@@ -32,9 +33,9 @@ public class Gravity
         float yDirection = (currentForce.y < 0.0f) ? -1.0f : 1.0f;
         float zDirection = (currentForce.z < 0.0f) ? -1.0f : 1.0f;
 
-        float xReveresed = ((directionIntent.x > 0.0f && currentForce.x < 0.0f) || (directionIntent.x < 0.0f && currentForce.x > 0.0f)) ? Gravity.ReveresedInertiaAcceleration : 1.0f;
-        float yReveresed = ((directionIntent.y > 0.0f && currentForce.y < 0.0f) || (directionIntent.y < 0.0f && currentForce.y > 0.0f)) ? Gravity.ReveresedInertiaAcceleration : 1.0f;
-        float zReveresed = ((directionIntent.z > 0.0f && currentForce.z < 0.0f) || (directionIntent.z < 0.0f && currentForce.z > 0.0f)) ? Gravity.ReveresedInertiaAcceleration : 1.0f;
+        float xReveresed = ((directionIntent.x > 0.0f && currentForce.x < 0.0f) || (directionIntent.x < 0.0f && currentForce.x > 0.0f)) ? Gravity.ReveresedInertiaAcceleration : Gravity.InertiaAcceleration;
+        float yReveresed = ((directionIntent.y > 0.0f && currentForce.y < 0.0f) || (directionIntent.y < 0.0f && currentForce.y > 0.0f)) ? Gravity.ReveresedInertiaAcceleration : Gravity.InertiaAcceleration;
+        float zReveresed = ((directionIntent.z > 0.0f && currentForce.z < 0.0f) || (directionIntent.z < 0.0f && currentForce.z > 0.0f)) ? Gravity.ReveresedInertiaAcceleration : Gravity.InertiaAcceleration;
 
         if (directionIntent.x > 0.0f)
             currentForce.x += Gravity.AdditionalInertiaPerupdate * xReveresed;
